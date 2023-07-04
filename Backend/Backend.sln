@@ -5,7 +5,7 @@ VisualStudioVersion = 17.0.31912.275
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "API", "API\API.csproj", "{F00A4B1C-01CC-42DF-9430-EEA14B5451A1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CronJob", "CronJob\CronJob.csproj", "{28860410-3837-428B-B10A-3134CC3BC9A0}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Updater", "Updater\Updater.csproj", "{59E300A3-9AEE-4EDB-856B-69FEC994203C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -17,10 +17,10 @@ Global
 		{F00A4B1C-01CC-42DF-9430-EEA14B5451A1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F00A4B1C-01CC-42DF-9430-EEA14B5451A1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F00A4B1C-01CC-42DF-9430-EEA14B5451A1}.Release|Any CPU.Build.0 = Release|Any CPU
-		{28860410-3837-428B-B10A-3134CC3BC9A0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{28860410-3837-428B-B10A-3134CC3BC9A0}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{28860410-3837-428B-B10A-3134CC3BC9A0}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{28860410-3837-428B-B10A-3134CC3BC9A0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{59E300A3-9AEE-4EDB-856B-69FEC994203C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{59E300A3-9AEE-4EDB-856B-69FEC994203C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{59E300A3-9AEE-4EDB-856B-69FEC994203C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{59E300A3-9AEE-4EDB-856B-69FEC994203C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
