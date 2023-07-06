@@ -1,1 +1,0 @@
-﻿// CronJob controlled script to request data from Spotify API and update local DB
