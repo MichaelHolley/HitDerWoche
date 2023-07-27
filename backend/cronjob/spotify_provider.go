@@ -1,4 +1,4 @@
-package main
+package cronjob
 
 import (
 	"encoding/json"
@@ -7,9 +7,6 @@ import (
 	"net/http"
 	"net/url"
 	"strings"
-	"time"
-
-	"github.com/robfig/cron"
 )
 
 // URL of the authentication endpoint
@@ -21,20 +18,6 @@ const clientSecret = ""
 
 // Playlist ID
 const playlistID = ""
-
-type PlaylistResponse struct {
-	Items []struct {
-		Track struct {
-			Name string `json:"name"`
-		} `json:"track"`
-	} `json:"items"`
-}
-
-type AuthResponse struct {
-	AccessToken string `json:"access_token"`
-	ExpiresIn   int    `json:"expires_in"`
-	TokenType   string `json:"token_type"`
-}
 
 func requestAccessToken() (token string, success bool) {
 	// Create the form data with client credentials
@@ -83,7 +66,7 @@ func requestAccessToken() (token string, success bool) {
 	return authResponse.AccessToken, true
 }
 
-func updateData() {
+func UpdateData() {
 	// Set your Spotify access token here
 	accessToken, success := requestAccessToken()
 	if !success {
@@ -126,20 +109,4 @@ func updateData() {
 	fmt.Printf("%d tracks found\n", len(playlistResp.Items))
 
 	// TODO: Write to DB
-}
-
-func main() {
-	// Create a new cron scheduler
-	c := cron.New()
-
-	// Schedule the cron job to run every 15 minutes
-	c.AddFunc("*/15 * * * *", func() {
-		fmt.Println("Running cronjob at:", time.Now())
-		updateData()
-	})
-
-	// Start the cron scheduler
-	c.Start()
-
-	select {}
 }
