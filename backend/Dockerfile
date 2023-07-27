@@ -14,7 +14,7 @@ RUN go mod download
 COPY . .
 
 # Build the Go application
-RUN go build -o cronjob .
+RUN go build -o backend .
 
 # Set the entry point command to run the Go application
-CMD ["./cronjob"]
+CMD ["./backend"]
