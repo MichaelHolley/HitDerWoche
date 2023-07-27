@@ -2,13 +2,14 @@ package main
 
 import (
 	"encoding/json"
-  "github.com/robfig/cron"
 	"fmt"
 	"log"
 	"net/http"
 	"net/url"
 	"strings"
 	"time"
+
+	"github.com/robfig/cron"
 )
 
 // URL of the authentication endpoint
@@ -36,7 +37,6 @@ type AuthResponse struct {
 }
 
 func requestAccessToken() (token string, success bool) {
-
 	// Create the form data with client credentials
 	formData := url.Values{}
 	formData.Set("grant_type", "client_credentials")
@@ -78,7 +78,7 @@ func requestAccessToken() (token string, success bool) {
 	}
 
 	// Access the parsed response fields
-	fmt.Println("Access Token:", authResponse.AccessToken)
+	fmt.Println("Using Access Token:", authResponse.AccessToken)
 
 	return authResponse.AccessToken, true
 }
@@ -86,7 +86,7 @@ func requestAccessToken() (token string, success bool) {
 func updateData() {
 	// Set your Spotify access token here
 	accessToken, success := requestAccessToken()
-	if success != true {
+	if !success {
 		return
 	}
 
@@ -123,10 +123,7 @@ func updateData() {
 	}
 
 	// Display the song names
-	fmt.Println("Playlist Songs:")
-	for _, item := range playlistResp.Items {
-		fmt.Println(item.Track.Name)
-	}
+	fmt.Printf("%d tracks found\n", len(playlistResp.Items))
 
 	// TODO: Write to DB
 }
@@ -137,8 +134,8 @@ func main() {
 
 	// Schedule the cron job to run every 15 minutes
 	c.AddFunc("*/15 * * * *", func() {
-			fmt.Println("Running cronjob at:", time.Now())
-			updateData()
+		fmt.Println("Running cronjob at:", time.Now())
+		updateData()
 	})
 
 	// Start the cron scheduler
