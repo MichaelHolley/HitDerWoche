@@ -2,6 +2,7 @@ package main
 
 import (
 	"backend/cronjob"
+	"backend/services"
 	"fmt"
 	"log"
 	"net/http"
@@ -16,7 +17,7 @@ func startCronJob() {
 	c := cron.New()
 
 	// Schedule the cron job to run every 15 minutes
-	c.AddFunc("*/15 * * * *", func() {
+	c.AddFunc("* * * * *", func() {
 		fmt.Println("Running cronjob at:", time.Now())
 		cronjob.UpdateData()
 	})
@@ -38,6 +39,8 @@ func startApi() {
 }
 
 func main() {
+	services.InitDatabase()
+
 	go startCronJob()
 
 	go startApi()

@@ -1,10 +1,10 @@
 package cronjob
 
+import "backend/types"
+
 type PlaylistResponse struct {
 	Items []struct {
-		Track struct {
-			Name string `json:"name"`
-		} `json:"track"`
+		Track types.SimpleTrack `json:"track"`
 	} `json:"items"`
 }
 
