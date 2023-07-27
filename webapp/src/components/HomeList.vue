@@ -8,6 +8,27 @@
       artist: 'the artist',
       releasYear: 1999,
       image: 'https://cataas.com/cat/says/hello%20world!'
+    },
+    {
+      id: '123',
+      title: 'the very cool song title',
+      artist: 'the artist',
+      releasYear: 1999,
+      image: 'https://cataas.com/cat/says/hello%20world!'
+    },
+    {
+      id: '123',
+      title: 'the very cool song title',
+      artist: 'the artist',
+      releasYear: 1999,
+      image: 'https://cataas.com/cat/says/hello%20world!'
+    },
+    {
+      id: '123',
+      title: 'the very cool song title',
+      artist: 'the artist',
+      releasYear: 1999,
+      image: 'https://cataas.com/cat/says/hello%20world!'
     }
   ])
 </script>
@@ -15,15 +36,15 @@
 <template>
   <div id="overview" class="min-h-screen">
     <div class="text-3xl font-bold text-center pt-10">Die letzten Songs</div>
-    <div>
+    <div class="xl:w-8/12 md:w-10/12 sm:w-11/12 w-full px-3 sm:px-0 mx-auto">
       <ul>
         <li
           v-for="song in data"
           :key="song.id"
-          class="my-2 border-2 border-primary rounded-2xl py-3 px-6"
+          class="my-4 border-2 border-primary rounded-2xl py-3 px-6 shadow-md shadow-green-600"
         >
           <div class="flex flex-row">
-            <img :src="song.image" loading="lazy" class="h-32 image-full rounded mr-6" />
+            <img :src="song.image" loading="lazy" class="h-28 image-full rounded mr-6" />
             <div>
               <div class="text-2xl">
                 {{ song.title }}
