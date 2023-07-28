@@ -1,12 +1,12 @@
 package services
 
 import (
-	"database/sql"
 	"fmt"
 	"log"
 	"time"
 
-	_ "github.com/go-sql-driver/mysql"
+	"gorm.io/driver/mysql"
+	"gorm.io/gorm"
 )
 
 const (
@@ -21,27 +21,22 @@ func buildConnectionString() string {
 	return fmt.Sprintf("%s:%s@tcp(%s:%s)/%s", dbUsername, dbPassword, dbHost, dbPort, dbName)
 }
 
-func createTableIfNotExists(db *sql.DB) error {
-	createTableQuery := "CREATE TABLE IF NOT EXISTS Tracks(id INT AUTO_INCREMENT PRIMARY KEY, name VARCHAR(255) NOT NULL);"
-	_, err := db.Exec(createTableQuery)
-	return err
+func GetDatabase() (db *gorm.DB, err error) {
+	dataSourceName := buildConnectionString()
+	return gorm.Open(mysql.Open(dataSourceName), &gorm.Config{})
 }
 
 func InitDatabase() {
 	fmt.Println("Initializing Database ...")
 	time.Sleep(30 * time.Second)
 
-	dataSourceName := buildConnectionString()
-	db, err := sql.Open("mysql", dataSourceName)
+	db, err := GetDatabase()
 	if err != nil {
-		log.Fatal(err)
-	}
-	defer db.Close()
-
-	// Create the table if it doesn't exist
-	if err := createTableIfNotExists(db); err != nil {
-		log.Fatal(err)
+		log.Fatal("Failed to connect to database:", err)
 	}
 
-	fmt.Println("Database and Table created (if not existed) successfully!")
+	// Migrate the schema
+	db.AutoMigrate(&Track{})
+
+	fmt.Println("Database-Migration applied")
 }

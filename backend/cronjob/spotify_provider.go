@@ -1,6 +1,8 @@
 package cronjob
 
 import (
+	"backend/services"
+	"backend/types"
 	"encoding/json"
 	"fmt"
 	"log"
@@ -61,7 +63,7 @@ func requestAccessToken() (token string, success bool) {
 	}
 
 	// Access the parsed response fields
-	fmt.Println("Using Access Token:", authResponse.AccessToken)
+	fmt.Println("Using Access Token:", authResponse.AccessToken[0:20]+"...")
 
 	return authResponse.AccessToken, true
 }
@@ -108,5 +110,10 @@ func UpdateData() {
 	// Display the song names
 	fmt.Printf("%d tracks found\n", len(playlistResp.Items))
 
-	// TODO: Write to DB
+	var tracks []types.SimpleTrack = make([]types.SimpleTrack, len(playlistResp.Items))
+	for i, t := range playlistResp.Items {
+		tracks[i] = t.Track
+	}
+
+	services.SaveTracks(tracks)
 }

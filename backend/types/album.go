@@ -32,7 +32,7 @@ type SimpleAlbum struct {
 	// widest first.
 	Images []Image `json:"images"`
 	// Known external URLs for this album.
-	ExternalURLs map[string]string `json:"external_urls"`
+	// TODO ExternalURLs map[string]string `json:"external_urls"`
 	// The date the album was first released.  For example, "1981-12-15".
 	// Depending on the ReleaseDatePrecision, it might be shown as
 	// "1981" or "1981-12". You can use ReleaseDateTime to convert this
@@ -41,48 +41,3 @@ type SimpleAlbum struct {
 	// The precision with which ReleaseDate value is known: "year", "month", or "day"
 	ReleaseDatePrecision string `json:"release_date_precision"`
 }
-
-// Copyright contains the copyright statement associated with an album.
-type Copyright struct {
-	// The copyright text for the album.
-	Text string `json:"text"`
-	// The type of copyright.
-	Type string `json:"type"`
-}
-
-// FullAlbum provides extra album data in addition to the data provided by SimpleAlbum.
-type FullAlbum struct {
-	SimpleAlbum
-	Copyrights []Copyright `json:"copyrights"`
-	Genres     []string    `json:"genres"`
-	// The popularity of the album, represented as an integer between 0 and 100,
-	// with 100 being the most popular.  Popularity of an album is calculated
-	// from the popularity of the album's individual tracks.
-	Popularity  int               `json:"popularity"`
-	Tracks      SimpleTrackPage   `json:"tracks"`
-	ExternalIDs map[string]string `json:"external_ids"`
-}
-
-// SavedAlbum provides info about an album saved to an user's account.
-type SavedAlbum struct {
-	// The date and time the track was saved, represented as an ISO
-	// 8601 UTC timestamp with a zero offset (YYYY-MM-DDTHH:MM:SSZ).
-	// You can use the TimestampLayout constant to convert this to
-	// a time.Time value.
-	AddedAt   string `json:"added_at"`
-	FullAlbum `json:"album"`
-}
-
-// AlbumType represents the type of an album. It can be used to filter
-// results when searching for albums.
-type AlbumType int
-
-// AlbumType values that can be used to filter which types of albums are
-// searched for.  These are flags that can be bitwise OR'd together
-// to search for multiple types of albums simultaneously.
-const (
-	AlbumTypeAlbum AlbumType = 1 << iota
-	AlbumTypeSingle
-	AlbumTypeAppearsOn
-	AlbumTypeCompilation
-)

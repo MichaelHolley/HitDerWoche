@@ -29,8 +29,8 @@ func startCronJob() {
 func startApi() {
 	router := gin.Default()
 
-	router.GET("/hello", func(c *gin.Context) {
-		c.JSON(http.StatusOK, gin.H{"message": "Hello, world!"})
+	router.GET("/tracks", func(c *gin.Context) {
+		c.JSON(http.StatusOK, gin.H{"items": services.GetTracks()})
 	})
 
 	if err := router.Run(":5000"); err != nil {
