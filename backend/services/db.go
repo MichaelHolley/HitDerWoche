@@ -4,63 +4,35 @@ import (
 	"database/sql"
 	"fmt"
 	"log"
+	"time"
 
 	_ "github.com/go-sql-driver/mysql"
 )
 
 const (
-	driverName = "mysql"
 	dbUsername = "root"
-	dbPassword = "my-secret-password"
+	dbPassword = "mysecretpassword"
 	dbHost     = "db"
 	dbPort     = "3306"
 	dbName     = "hitderwoche"
 )
 
-func buildConnectionString(includeDb bool) string {
-	conn := fmt.Sprintf("%s:%s@tcp(%s:%s)/", dbUsername, dbPassword, dbHost, dbPort)
-
-	if includeDb {
-		conn += dbName
-	}
-
-	return conn
-}
-
-func createDatabaseIfNotExists(db *sql.DB) error {
-	_, err := db.Exec(fmt.Sprintf("CREATE DATABASE IF NOT EXISTS %s", dbName))
-	return err
+func buildConnectionString() string {
+	return fmt.Sprintf("%s:%s@tcp(%s:%s)/%s", dbUsername, dbPassword, dbHost, dbPort, dbName)
 }
 
 func createTableIfNotExists(db *sql.DB) error {
-	createTableQuery := `
-		CREATE TABLE IF NOT EXISTS Tracks (
-			id VARCHAR(100) PRIMARY KEY,
-			name VARCHAR(255),
-		);`
+	createTableQuery := "CREATE TABLE IF NOT EXISTS Tracks(id INT AUTO_INCREMENT PRIMARY KEY, name VARCHAR(255) NOT NULL);"
 	_, err := db.Exec(createTableQuery)
 	return err
 }
 
 func InitDatabase() {
 	fmt.Println("Initializing Database ...")
+	time.Sleep(30 * time.Second)
 
-	// Connect to MySQL server
-	dataSourceName := buildConnectionString(false)
-	db, err := sql.Open(driverName, dataSourceName)
-	if err != nil {
-		log.Fatal(err)
-	}
-	defer db.Close()
-
-	// Create the database if it doesn't exist
-	if err := createDatabaseIfNotExists(db); err != nil {
-		log.Fatal(err)
-	}
-
-	// Use the database
-	dataSourceName = buildConnectionString(true)
-	db, err = sql.Open(driverName, dataSourceName)
+	dataSourceName := buildConnectionString()
+	db, err := sql.Open("mysql", dataSourceName)
 	if err != nil {
 		log.Fatal(err)
 	}
