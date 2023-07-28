@@ -43,6 +43,8 @@ func createTableIfNotExists(db *sql.DB) error {
 }
 
 func InitDatabase() {
+	fmt.Println("Initializing Database ...")
+
 	// Connect to MySQL server
 	dataSourceName := buildConnectionString(false)
 	db, err := sql.Open(driverName, dataSourceName)

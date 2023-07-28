@@ -41,12 +41,12 @@
         <li
           v-for="song in data"
           :key="song.id"
-          class="my-4 border-2 border-primary rounded-2xl py-3 px-6 shadow-md shadow-green-600"
+          class="my-4 rounded-2xl py-3 px-6 border-2 border-stone-700 bg-stone-900 hover:bg-stone-800 shadow-sm shadow-emerald-600 hover:cursor-pointer"
         >
           <div class="flex flex-row">
             <img :src="song.image" loading="lazy" class="h-28 image-full rounded mr-6" />
             <div>
-              <div class="text-2xl">
+              <div class="text-2xl font-medium">
                 {{ song.title }}
               </div>
               <div class="text-lg">
