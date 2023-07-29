@@ -11,12 +11,12 @@
         <p class="pb-6 text-2xl">die Hit-der-Woche Spotify-Playlist</p>
         <div class="flex flex-row justify-center">
           <a
-            class="btn btn-primary mx-1"
+            class="btn btn-primary mx-2"
             href="https://open.spotify.com/playlist/4RnajpiFvsWCxU3xqwXXrc"
             target="_blank"
             >Zu Spotify</a
           >
-          <RouterLink to="preview" class="btn btn-outline btn-primary mx-1">Vorschau</RouterLink>
+          <RouterLink to="preview" class="btn btn-outline btn-primary mx-2">Vorschau</RouterLink>
         </div>
         <div class="my-6 hover:text-primary">
           <a href="#overview" class="flex flex-col justify-center items-center text-center">

@@ -6,7 +6,7 @@ import (
 
 type Track struct {
 	ID               types.ID  `json:"id" gorm:"primarykey"`
-	PlaylistPosition int       `json:"playlistPosition"`
+	PlaylistPosition int       `json:"playlist_position"`
 	Artists          string    `json:"artists"`
 	DiscNumber       int       `json:"disc_number"`
 	Duration         int       `json:"duration_ms"`
@@ -17,4 +17,5 @@ type Track struct {
 	TrackNumber      int       `json:"track_number"`
 	URI              types.URI `json:"uri"`
 	Type             string    `json:"type"`
+	ImageUrl         string    `json:"image_url"`
 }

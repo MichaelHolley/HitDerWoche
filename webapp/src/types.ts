@@ -1,6 +1,6 @@
 export interface Track {
   id: string
-  playlistPosition: number
+  playlist_position: number
   artists: string
   disc_number: number
   duration_ms: number
@@ -11,4 +11,5 @@ export interface Track {
   track_number: number
   uri: string
   type: string
+  image_url: string
 }

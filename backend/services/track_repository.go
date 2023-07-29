@@ -25,15 +25,23 @@ func SaveTracks(tracks []types.SimpleTrack) {
 
 	// iterate tracks
 	for i, t := range tracks {
-		artistNames := ""
-
 		// build artists-string
+		artistNames := ""
 		for j, a := range t.Artists {
 			if j != 0 {
 				artistNames += ", "
 			}
 
 			artistNames += a.Name
+		}
+
+		// select largest image
+		imgHeight, imageUrl := 0, ""
+		for _, img := range t.Album.Images {
+			if img.Height > imgHeight {
+				imgHeight = img.Height
+				imageUrl = img.URL
+			}
 		}
 
 		var track = Track{
@@ -49,6 +57,7 @@ func SaveTracks(tracks []types.SimpleTrack) {
 			TrackNumber:      t.TrackNumber,
 			URI:              t.URI,
 			Type:             t.Type,
+			ImageUrl:         imageUrl,
 		}
 
 		result := db.Save(&track)
