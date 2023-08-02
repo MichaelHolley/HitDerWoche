@@ -8,25 +8,19 @@ import (
 	"log"
 	"net/http"
 	"net/url"
+	"os"
 	"strings"
 )
 
 // URL of the authentication endpoint
 const authURL = "https://accounts.spotify.com/api/token"
 
-// Client credentials
-const clientID = ""
-const clientSecret = ""
-
-// Playlist ID
-const playlistID = ""
-
 func requestAccessToken() (token string, success bool) {
 	// Create the form data with client credentials
 	formData := url.Values{}
 	formData.Set("grant_type", "client_credentials")
-	formData.Set("client_id", clientID)
-	formData.Set("client_secret", clientSecret)
+	formData.Set("client_id", os.Getenv("CLIENT_ID"))
+	formData.Set("client_secret", os.Getenv("CLIENT_SECRET"))
 
 	// Prepare the request
 	req, err := http.NewRequest("POST", authURL, strings.NewReader(formData.Encode()))
@@ -79,7 +73,7 @@ func UpdateData() {
 	client := &http.Client{}
 
 	// Create a GET request to retrieve the playlist
-	url := fmt.Sprintf("https://api.spotify.com/v1/playlists/%s/tracks", playlistID)
+	url := fmt.Sprintf("https://api.spotify.com/v1/playlists/%s/tracks", os.Getenv("PLAYLIST_ID"))
 	req, err := http.NewRequest("GET", url, nil)
 	if err != nil {
 		log.Fatal(err)

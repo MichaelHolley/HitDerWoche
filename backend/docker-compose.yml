@@ -5,6 +5,10 @@ services:
       context: ./
     ports:
       - 5000:5000
+    environment:
+      - PLAYLIST_ID=4RnajpiFvsWCxU3xqwXXrc
+      - CLIENT_ID=
+      - CLIENT_SECRET=
     depends_on:
       - db
   db:
@@ -15,6 +19,6 @@ services:
     ports:
       - 3306:3306
     volumes:
-      - dbdata:/var/lib/mysql
+      - data:/var/lib/mysql
 volumes:
-  dbdata:
+  data:
