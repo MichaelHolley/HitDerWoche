@@ -17,7 +17,7 @@ func startCronJob() {
 	c := cron.New()
 
 	// Schedule the cron job to run every 15 minutes
-	c.AddFunc("* * * * *", func() {
+	c.AddFunc("*/15 * * * *", func() {
 		fmt.Println("Running cronjob at:", time.Now())
 		cronjob.UpdateData()
 	})
@@ -40,22 +40,12 @@ func startApi() {
 	}
 }
 
-func main() {
-	services.InitDatabase()
-
-	go startCronJob()
-
-	go startApi()
-
-	select {}
-}
-
 // Define the Cors middleware to allow all CORS requests
 func corsMiddleware() gin.HandlerFunc {
 	return func(c *gin.Context) {
 		c.Writer.Header().Set("Access-Control-Allow-Origin", "*")
-		c.Writer.Header().Set("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS")
-		c.Writer.Header().Set("Access-Control-Allow-Headers", "Origin, Authorization, Content-Type")
+		c.Writer.Header().Set("Access-Control-Allow-Methods", "GET")
+		c.Writer.Header().Set("Access-Control-Allow-Headers", "Origin, Content-Type")
 
 		// Handle preflight requests
 		if c.Request.Method == "OPTIONS" {
@@ -65,4 +55,14 @@ func corsMiddleware() gin.HandlerFunc {
 
 		c.Next()
 	}
+}
+
+func main() {
+	services.InitDatabase()
+
+	go startCronJob()
+
+	go startApi()
+
+	select {}
 }
