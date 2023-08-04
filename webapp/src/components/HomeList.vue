@@ -18,8 +18,8 @@
 
 <template>
   <div id="overview" class="min-h-screen">
-    <div class="text-3xl font-bold text-center pt-10">Die letzten Songs</div>
-    <div class="xl:w-8/12 md:w-10/12 sm:w-11/12 w-full px-3 sm:px-0 mx-auto">
+    <div class="text-4xl font-bold text-center pt-10">Die letzten Songs</div>
+    <div class="mt-8 xl:w-8/12 md:w-10/12 sm:w-11/12 w-full px-3 sm:px-0 mx-auto">
       <ul>
         <li v-for="track in tracks" :key="track.id" class="my-4 py-3 hover:bg-stone-800 rounded-md">
           <div class="flex flex-row">

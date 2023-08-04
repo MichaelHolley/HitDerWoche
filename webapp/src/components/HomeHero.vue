@@ -3,9 +3,9 @@
 </script>
 
 <template>
-  <div class="hero min-h-screen">
+  <div class="hero min-h-screen" id="hero">
     <div class="hero-content text-center">
-      <div class="max-w-md">
+      <div class="max-w-md font-medium">
         <h1 class="text-5xl font-bold">Hit der Woche</h1>
         <p class="pt-6 text-xl">Das Party-Büro präsentiert</p>
         <p class="pb-6 text-2xl">die Hit-der-Woche Spotify-Playlist</p>
@@ -28,3 +28,22 @@
     </div>
   </div>
 </template>
+
+<style>
+  #hero {
+    position: relative;
+  }
+
+  #hero::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: 50%;
+    background-image: url(https://media.giphy.com/media/GNaAKmDFKwKEHEG064/giphy.gif);
+    filter: brightness(0.5) blur(7px);
+  }
+</style>
