@@ -7,8 +7,9 @@ services:
       - 5000:5000
     environment:
       - PLAYLIST_ID=4RnajpiFvsWCxU3xqwXXrc
-      - CLIENT_ID=
-      - CLIENT_SECRET=
+      - SPOTIFY_CLIENT_ID=
+      - SPOTIFY_CLIENT_SECRET=
+      - DB_PASSWORD=mysecretpassword
     depends_on:
       - db
   db:

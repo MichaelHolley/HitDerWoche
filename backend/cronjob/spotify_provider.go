@@ -19,8 +19,8 @@ func requestAccessToken() (token string, success bool) {
 	// Create the form data with client credentials
 	formData := url.Values{}
 	formData.Set("grant_type", "client_credentials")
-	formData.Set("client_id", os.Getenv("CLIENT_ID"))
-	formData.Set("client_secret", os.Getenv("CLIENT_SECRET"))
+	formData.Set("client_id", os.Getenv("SPOTIFY_CLIENT_ID"))
+	formData.Set("client_secret", os.Getenv("SPOTIFY_CLIENT_SECRET"))
 
 	// Prepare the request
 	req, err := http.NewRequest("POST", authURL, strings.NewReader(formData.Encode()))

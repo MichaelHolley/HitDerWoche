@@ -3,6 +3,7 @@ package services
 import (
 	"fmt"
 	"log"
+	"os"
 	"time"
 
 	"gorm.io/driver/mysql"
@@ -11,14 +12,13 @@ import (
 
 const (
 	dbUsername = "root"
-	dbPassword = "mysecretpassword"
 	dbHost     = "db"
 	dbPort     = "3306"
 	dbName     = "hitderwoche"
 )
 
 func buildConnectionString() string {
-	return fmt.Sprintf("%s:%s@tcp(%s:%s)/%s", dbUsername, dbPassword, dbHost, dbPort, dbName)
+	return fmt.Sprintf("%s:%s@tcp(%s:%s)/%s", dbUsername, os.Getenv("DB_PASSWORD"), dbHost, dbPort, dbName)
 }
 
 func GetDatabase() (db *gorm.DB, err error) {
