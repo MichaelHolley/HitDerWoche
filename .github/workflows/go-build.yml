@@ -1,25 +1,24 @@
-name: Backend CI
+name: Backend Build CI
 
 on:
   push:
-    branches: [ "master" ]
+    branches: ["master"]
   pull_request:
-    branches: [ "master" ]
+    branches: ["master"]
 
 jobs:
-
   build:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v3
+      - uses: actions/checkout@v3
 
-    - name: Set up Go
-      uses: actions/setup-go@v4
-      with:
-        go-version: '1.18'
+      - name: Set up Go
+        uses: actions/setup-go@v4
+        with:
+          go-version: "1.18"
 
-    - name: Install dependencies
-      run: cd ./backend && go get .
+      - name: Install dependencies
+        run: cd ./backend && go get .
 
-    - name: Build
-      run: cd ./backend && go build -v .
+      - name: Build
+        run: cd ./backend && go build -v .
