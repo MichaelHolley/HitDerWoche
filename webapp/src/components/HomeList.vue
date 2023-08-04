@@ -5,7 +5,7 @@
 
   let tracks: Track[] = reactive([])
 
-  fetch('http://localhost:5000/tracks')
+  fetch(`${import.meta.env.VITE_API_URL}/api/tracks`)
     .then((resp) => resp.json())
     .then((data) => {
       console.log(data.items[0].imageUrl)

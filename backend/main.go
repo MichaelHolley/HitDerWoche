@@ -31,7 +31,7 @@ func startApi() {
 
 	router.Use(corsMiddleware())
 
-	router.GET("/tracks", func(c *gin.Context) {
+	router.GET("/api/tracks", func(c *gin.Context) {
 		c.JSON(http.StatusOK, gin.H{"items": services.GetTracks()})
 	})
 
