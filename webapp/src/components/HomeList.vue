@@ -10,7 +10,6 @@
   const playTrack = (track: Track) => {
     if (isValidPreviewUrl(track.preview_url)) {
       playerStore.playTrack(track);
-      playerStore.togglePlayState(true);
     }
   };
 
