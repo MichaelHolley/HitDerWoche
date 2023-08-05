@@ -1,5 +1,5 @@
 <script setup lang="ts">
-  import DownArrowIcon from './icons/IconDownArrow.vue'
+  import DownArrowIcon from '@/components/icons/IconDownArrow.vue';
 </script>
 
 <template>

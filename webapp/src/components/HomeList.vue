@@ -1,27 +1,26 @@
 <script setup lang="ts">
-  import { reactive } from 'vue'
-  import { type Track } from '../types'
-  import { formatDuration } from '../utils/datetime'
+  import { useTracksStore } from '@/store/tracks';
+  import { formatDuration } from '@/utils/datetime';
 
-  let tracks: Track[] = reactive([])
-
-  fetch(`${import.meta.env.VITE_API_URL}/api/tracks`)
-    .then((resp) => resp.json())
-    .then((data) => {
-      console.log(data.items[0].imageUrl)
-
-      tracks.push(
-        ...(data.items as Track[]).sort((t1, t2) => t2.playlist_position - t1.playlist_position)
-      )
-    })
+  const trackStore = useTracksStore();
 </script>
 
 <template>
   <div id="overview" class="min-h-screen">
     <div class="text-4xl font-bold text-center pt-10">Die letzten Songs</div>
-    <div class="mt-8 xl:w-8/12 md:w-10/12 sm:w-11/12 w-full px-3 sm:px-0 mx-auto">
+    <div v-if="trackStore.isLoading" class="h-40 w-full">
+      <span
+        class="loading loading-infinity loading-lg text-primary scale-[2.5] h-full m-auto"
+        style="display: table"
+      ></span>
+    </div>
+    <div v-else class="mt-8 xl:w-8/12 md:w-10/12 sm:w-11/12 w-full px-3 sm:px-0 mx-auto">
       <ul>
-        <li v-for="track in tracks" :key="track.id" class="my-4 py-3 hover:bg-stone-900 rounded">
+        <li
+          v-for="track in trackStore.tracks"
+          :key="track.id"
+          class="my-4 py-3 hover:bg-stone-900 rounded"
+        >
           <div class="flex flex-row relative">
             <div class="pl-3">
               <div class="h-28 w-28">
