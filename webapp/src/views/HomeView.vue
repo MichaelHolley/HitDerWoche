@@ -1,4 +1,5 @@
 <script setup lang="ts">
+  import AudioPlayer from '@/components/AudioPlayer.vue';
   import HomeHero from '@/components/HomeHero.vue';
   import HomeList from '@/components/HomeList.vue';
 </script>
@@ -7,5 +8,6 @@
   <main>
     <HomeHero />
     <HomeList />
+    <AudioPlayer />
   </main>
 </template>

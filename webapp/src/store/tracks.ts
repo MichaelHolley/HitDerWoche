@@ -6,15 +6,17 @@ export const useTracksStore = defineStore('tracks', {
   actions: {
     refreshTracks() {
       this.isLoading = true;
+
       fetch(`${import.meta.env.VITE_API_URL}/api/tracks`)
         .then((resp) => {
           this.isLoading = false;
           return resp.json();
         })
         .then((data) => {
-          this.tracks.push(
-            ...(data.items as Track[]).sort((t1, t2) => t2.playlist_position - t1.playlist_position)
+          this.tracks = (data.items as Track[]).sort(
+            (t1, t2) => t2.playlist_position - t1.playlist_position
           );
+
           this.isLoading = false;
         });
     }

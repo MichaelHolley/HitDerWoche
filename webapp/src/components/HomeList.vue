@@ -1,8 +1,22 @@
 <script setup lang="ts">
+  import { usePlayerStore } from '@/store/player';
   import { useTracksStore } from '@/store/tracks';
+  import type { Track } from '@/types';
   import { formatDuration } from '@/utils/datetime';
 
   const trackStore = useTracksStore();
+  const playerStore = usePlayerStore();
+
+  const playTrack = (track: Track) => {
+    if (isValidPreviewUrl(track.preview_url)) {
+      playerStore.playTrack(track);
+      playerStore.togglePlayState(true);
+    }
+  };
+
+  const isValidPreviewUrl = (url: string | undefined) => {
+    return !!url && url != '';
+  };
 </script>
 
 <template>
@@ -20,6 +34,8 @@
           v-for="track in trackStore.tracks"
           :key="track.id"
           class="my-4 py-3 hover:bg-stone-900 rounded"
+          :class="{ 'hover:cursor-pointer': isValidPreviewUrl(track.preview_url) }"
+          @click="() => playTrack(track)"
         >
           <div class="flex flex-row relative">
             <div class="pl-3">
