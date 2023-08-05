@@ -21,13 +21,14 @@
     <div class="text-4xl font-bold text-center pt-10">Die letzten Songs</div>
     <div class="mt-8 xl:w-8/12 md:w-10/12 sm:w-11/12 w-full px-3 sm:px-0 mx-auto">
       <ul>
-        <li v-for="track in tracks" :key="track.id" class="my-4 py-3 hover:bg-stone-800 rounded-md">
-          <div class="flex flex-row">
-            <div class="w-1/12 text-3xl text-end pr-2 text-stone-500 font-thin">
-              {{ track.playlist_position }}
+        <li v-for="track in tracks" :key="track.id" class="my-4 py-3 hover:bg-stone-900 rounded">
+          <div class="flex flex-row relative">
+            <div class="pl-3">
+              <div class="h-28 w-28">
+                <img :src="track.image_url" loading="lazy" class="image-full rounded" />
+              </div>
             </div>
-            <img :src="track.image_url" loading="lazy" class="h-28 image-full rounded" />
-            <div class="w-full flex flex-col sm:flex-row justify-between px-6">
+            <div class="w-full flex flex-col sm:flex-row justify-between px-6 z-10">
               <div>
                 <div class="text-2xl font-medium text-primary">
                   {{ track.name }}
@@ -39,9 +40,9 @@
                   {{ formatDuration(track.duration_ms) }}
                 </div>
               </div>
-              <div v-if="track.preview_url" class="flex flex-col justify-center">
-                <audio :src="track.preview_url" controls></audio>
-              </div>
+            </div>
+            <div class="text-5xl p-0.5 font-thin absolute bottom-0 right-6 rounded text-stone-800">
+              {{ track.playlist_position }}
             </div>
           </div>
         </li>
