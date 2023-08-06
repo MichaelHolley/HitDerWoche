@@ -6,8 +6,10 @@
 
 <template>
   <div class="flex flex-row justify-start items-center">
-    <span class="text-stone-600">{{ '#' + currentTrack?.playlist_position }}</span>
-    <span class="mx-2 font-bold">{{ currentTrack?.name }}</span>
-    <span class="text-stone-600">{{ currentTrack?.artists }}</span>
+    <p>
+      <span class="text-stone-600">{{ '#' + currentTrack?.playlist_position }}</span>
+      <span class="mx-2 font-bold">{{ currentTrack?.name }}</span>
+      <span class="text-stone-600">{{ currentTrack?.artists }}</span>
+    </p>
   </div>
 </template>
