@@ -54,23 +54,36 @@
       return;
     }
   }
+
+  function getFormatedTrackname() {
+    let display = '[#' + playerStore.currentTrack.value?.playlist_position + '] ';
+    display += playerStore.currentTrack.value?.name;
+
+    return display;
+  }
 </script>
 
 <template>
-  <div class="sticky bottom-0 z-50 border-t-2 bg-stone-800 border-primary">
+  <div
+    class="sticky z-50 border-t-2 bg-stone-800 border-primary transition-all duration-700"
+    :class="{
+      '-bottom-40 opacity-0': !playerStore.currentTrack.value,
+      ' bottom-0 opacity-100': playerStore.currentTrack.value
+    }"
+  >
     <audio ref="player" hidden :src="playerStore.currentTrack.value?.preview_url"></audio>
     <div class="p-3 flex flex-row justify-between">
-      <div>{{ playerStore.currentTrack.value?.name }}</div>
-      <div>
-        <div @click="toggleAudioState()">{{ audioState === 'playing' ? 'SPIELT' : 'STUMM' }}</div>
+      <div class="basis-3/12">{{ getFormatedTrackname() }}</div>
+      <div class="basis-6/12 justify-center text-center">
+        <div @click="toggleAudioState()">{{ audioState === 'playing' ? 'Play' : 'Pause' }}</div>
       </div>
-      <div class="flex flex-row">
+      <div class="justify-end items-end align-bottom ml-auto">
         <input
           type="range"
           min="0"
           max="1"
           :step="0.02"
-          class="range range-xs range-primary"
+          class="range range-xs range-primary w-40"
           v-model="playerStore.volume.value"
           @input="onVolumeChange"
         />
