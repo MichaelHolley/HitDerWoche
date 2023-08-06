@@ -73,13 +73,16 @@
         :currentTrack="playerStore.currentTrack.value"
       ></TrackDisplay>
       <div class="w-full sm:w-1/2 flex flex-row justify-between">
-        <div class="w-1/2 sm:w-auto sm:mb-0">
-          <div class="w-auto hover:cursor-pointer" @click="toggleAudioState()">
-            <PlayIcon class="w-8 h-8 p-1 border-2 rounded-full" v-if="audioState === 'playing'" />
+        <div class="w-1/2 sm:w-auto sm:mb-0 mt-2 sm:mt-0">
+          <div
+            class="w-auto hover:cursor-pointer flex flex-row justify-center sm:justify-start"
+            @click="toggleAudioState()"
+          >
+            <PlayIcon class="w-8 h-8 p-1 border-2 rounded-full" v-if="audioState === 'paused'" />
             <PauseIcon
               class="w-8 h-8 p-1 border-2 rounded-full"
               :class="{ 'text-stone-600 border-stone-600': audioState === 'blocked' }"
-              v-else-if="audioState === 'paused' || audioState === 'blocked'"
+              v-else-if="audioState === 'playing' || audioState === 'blocked'"
             />
           </div>
         </div>
