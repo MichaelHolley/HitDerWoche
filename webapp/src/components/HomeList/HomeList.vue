@@ -2,7 +2,7 @@
   import { usePlayerStore } from '@/store/player';
   import { useTracksStore } from '@/store/tracks';
   import type { Track } from '@/types';
-  import { formatDuration } from '@/utils/datetime';
+  import ListItem from './ListItem.vue';
 
   const trackStore = useTracksStore();
   const playerStore = usePlayerStore();
@@ -32,33 +32,11 @@
         <li
           v-for="track in trackStore.tracks"
           :key="track.id"
-          class="my-4 py-3 hover:bg-stone-900 rounded"
+          class="my-4"
           :class="{ 'hover:cursor-pointer': isValidPreviewUrl(track.preview_url) }"
           @click="() => playTrack(track)"
         >
-          <div class="flex flex-row relative">
-            <div class="pl-3">
-              <div class="h-28 w-28">
-                <img :src="track.image_url" loading="lazy" class="image-full rounded" />
-              </div>
-            </div>
-            <div class="w-full flex flex-col sm:flex-row justify-between px-6 z-10">
-              <div>
-                <div class="text-2xl font-medium text-primary">
-                  {{ track.name }}
-                </div>
-                <div class="w-full text-lg">
-                  {{ track.artists }}
-                </div>
-                <div class="text-stone-500">
-                  {{ formatDuration(track.duration_ms) }}
-                </div>
-              </div>
-            </div>
-            <div class="text-5xl p-0.5 font-thin absolute bottom-0 right-6 rounded text-stone-800">
-              {{ track.playlist_position }}
-            </div>
-          </div>
+          <ListItem :track="track"></ListItem>
         </li>
       </ul>
     </div>

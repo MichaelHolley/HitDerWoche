@@ -1,5 +1,5 @@
 <script setup lang="ts">
-  import DownArrowIcon from '@/components/icons/IconDownArrow.vue';
+  import { ChevronDownIcon } from '@heroicons/vue/24/solid';
 </script>
 
 <template>
@@ -21,8 +21,8 @@
         <div class="my-6 hover:text-primary">
           <a href="#overview" class="flex flex-col justify-center items-center text-center">
             <p class="text-xl">zur Übersicht</p>
-            <DownArrowIcon
-          /></a>
+            <ChevronDownIcon class="h-10" />
+          </a>
         </div>
       </div>
     </div>

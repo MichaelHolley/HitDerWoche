@@ -2,6 +2,8 @@
   import { usePlayerStore } from '@/store/player';
   import { storeToRefs } from 'pinia';
   import { onMounted, ref, watch } from 'vue';
+  import TrackDisplay from './TrackDisplay.vue';
+  import { PlayIcon, PauseIcon } from '@heroicons/vue/24/solid';
 
   type AudioState = 'playing' | 'paused' | 'blocked';
 
@@ -54,13 +56,6 @@
       return;
     }
   }
-
-  function getFormatedTrackname() {
-    let display = '[#' + playerStore.currentTrack.value?.playlist_position + '] ';
-    display += playerStore.currentTrack.value?.name;
-
-    return display;
-  }
 </script>
 
 <template>
@@ -72,21 +67,33 @@
     }"
   >
     <audio ref="player" hidden :src="playerStore.currentTrack.value?.preview_url"></audio>
-    <div class="p-3 flex flex-row justify-between">
-      <div class="basis-3/12">{{ getFormatedTrackname() }}</div>
-      <div class="basis-6/12 justify-center text-center">
-        <div @click="toggleAudioState()">{{ audioState === 'playing' ? 'Play' : 'Pause' }}</div>
-      </div>
-      <div class="justify-end items-end align-bottom ml-auto">
-        <input
-          type="range"
-          min="0"
-          max="1"
-          :step="0.02"
-          class="range range-xs range-primary w-40"
-          v-model="playerStore.volume.value"
-          @input="onVolumeChange"
-        />
+    <div class="p-3 flex flex-row justify-between flex-wrap">
+      <TrackDisplay
+        class="w-full sm:w-1/2"
+        :currentTrack="playerStore.currentTrack.value"
+      ></TrackDisplay>
+      <div class="w-full sm:w-1/2 flex flex-row justify-between">
+        <div class="w-1/2 sm:w-auto sm:mb-0">
+          <div class="w-auto hover:cursor-pointer" @click="toggleAudioState()">
+            <PlayIcon class="w-8 h-8 p-1 border-2 rounded-full" v-if="audioState === 'playing'" />
+            <PauseIcon
+              class="w-8 h-8 p-1 border-2 rounded-full"
+              :class="{ 'text-stone-600 border-stone-600': audioState === 'blocked' }"
+              v-else-if="audioState === 'paused' || audioState === 'blocked'"
+            />
+          </div>
+        </div>
+        <div class="w-1/2 sm:w-auto flex justify-center items-center">
+          <input
+            type="range"
+            min="0"
+            max="1"
+            :step="0.02"
+            class="range range-xs range-primary"
+            v-model="playerStore.volume.value"
+            @input="onVolumeChange"
+          />
+        </div>
       </div>
     </div>
   </div>

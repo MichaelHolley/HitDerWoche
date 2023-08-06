@@ -1,7 +1,7 @@
 <script setup lang="ts">
-  import AudioPlayer from '@/components/AudioPlayer.vue';
+  import AudioPlayer from '@/components/AudioPlayer/AudioPlayer.vue';
   import HomeHero from '@/components/HomeHero.vue';
-  import HomeList from '@/components/HomeList.vue';
+  import HomeList from '@/components/HomeList/HomeList.vue';
 </script>
 
 <template>
