@@ -21,6 +21,7 @@
   watch(playerStore.currentTrack, (newVal) => {
     if (!newVal) {
       audioState.value = 'blocked';
+      player.value?.pause();
     } else {
       setTimeout(() => {
         player.value?.play().then(() => {
