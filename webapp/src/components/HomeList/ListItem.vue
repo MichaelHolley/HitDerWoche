@@ -17,10 +17,14 @@
       <div class="text-2xl font-medium text-primary flex flex-row justify-between">
         <div>{{ track.name }}</div>
         <div class="flex flex-row">
-          <div class="mr-6 tooltip" data-tip="Vorschau" :onclick="() => playTrack(track)">
+          <div
+            class="mr-6 tooltip hover:cursor-pointer"
+            data-tip="Vorschau"
+            :onclick="() => playTrack(track)"
+          >
             <PlayIcon
               v-if="!!track.preview_url && track.preview_url != ''"
-              class="h-6 hover:cursor-pointer"
+              class="h-6 hover:scale-105"
             />
           </div>
           <div class="tooltip" data-tip="Spotify">
