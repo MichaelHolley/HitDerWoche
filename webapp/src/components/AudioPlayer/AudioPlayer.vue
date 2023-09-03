@@ -1,9 +1,10 @@
 <script setup lang="ts">
   import { usePlayerStore } from '@/store/player';
+  import { SpeakerWaveIcon, SpeakerXMarkIcon } from '@heroicons/vue/24/outline';
+  import { PauseIcon, PlayIcon } from '@heroicons/vue/24/solid';
   import { storeToRefs } from 'pinia';
   import { onMounted, ref, watch } from 'vue';
   import TrackDisplay from './TrackDisplay.vue';
-  import { PlayIcon, PauseIcon } from '@heroicons/vue/24/solid';
 
   type AudioState = 'playing' | 'paused' | 'blocked';
 
@@ -67,7 +68,12 @@
       ' bottom-0 opacity-100': playerStore.currentTrack.value
     }"
   >
-    <audio ref="player" hidden :src="playerStore.currentTrack.value?.preview_url"></audio>
+    <audio
+      ref="player"
+      hidden
+      :src="playerStore.currentTrack.value?.preview_url"
+      :muted="playerStore.muted.value"
+    ></audio>
     <div class="p-3 flex flex-row justify-between flex-wrap">
       <TrackDisplay
         class="w-full sm:w-1/2"
@@ -87,7 +93,17 @@
             />
           </div>
         </div>
-        <div class="w-1/2 sm:w-auto flex justify-center items-center">
+        <div class="w-1/2 sm:w-auto flex flex-row justify-center items-center">
+          <div
+            class="hover:cursor-pointer mr-2"
+            :onclick="() => (playerStore.muted.value = !playerStore.muted.value)"
+          >
+            <SpeakerXMarkIcon
+              v-if="playerStore.volume.value === 0 || playerStore.muted.value"
+              class="h-6"
+            />
+            <SpeakerWaveIcon v-else class="h-6" />
+          </div>
           <input
             type="range"
             min="0"
