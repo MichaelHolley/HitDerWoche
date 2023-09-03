@@ -17,15 +17,17 @@
       <div class="text-2xl font-medium text-primary flex flex-row justify-between">
         <div>{{ track.name }}</div>
         <div class="flex flex-row">
-          <div :onclick="() => playTrack(track)">
+          <div class="mr-6 tooltip" data-tip="Vorschau" :onclick="() => playTrack(track)">
             <PlayIcon
               v-if="!!track.preview_url && track.preview_url != ''"
-              class="h-6 mr-4 hover:cursor-pointer"
+              class="h-6 hover:cursor-pointer"
             />
           </div>
-          <a :href="track.uri" target="_blank">
-            <ArrowUturnRightIcon class="h-6 hover:scale-105"
-          /></a>
+          <div class="tooltip" data-tip="Spotify">
+            <a :href="track.uri" target="_blank">
+              <ArrowUturnRightIcon class="h-6 hover:scale-105" />
+            </a>
+          </div>
         </div>
       </div>
       <div class="w-full text-lg">
