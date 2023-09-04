@@ -14,18 +14,16 @@
       </div>
     </div>
     <div class="w-full px-6 z-10">
-      <div class="text-2xl font-medium text-primary flex flex-row justify-between">
+      <div class="text-2xl font-medium text-primary flex flex-col md:flex-row justify-between">
         <div>{{ track.name }}</div>
         <div class="flex flex-row">
           <div
             class="mr-6 tooltip hover:cursor-pointer"
             data-tip="Vorschau"
             :onclick="() => playTrack(track)"
+            v-if="!!track.preview_url && track.preview_url != ''"
           >
-            <PlayIcon
-              v-if="!!track.preview_url && track.preview_url != ''"
-              class="h-6 hover:scale-105"
-            />
+            <PlayIcon class="h-6 hover:scale-105" />
           </div>
           <div class="tooltip" data-tip="Spotify">
             <a :href="track.uri" target="_blank">
