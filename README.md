@@ -13,8 +13,7 @@
 go-lang types were borrowed from this project <https://github.com/zmb3/spotify>
 
 ### Deploy with `docker-compose.yml`
-
-´´´yml
+```yml
 version: '3'
 services:
   backend:
@@ -41,4 +40,4 @@ services:
       - data:/var/lib/mysql
 volumes:
   data:
-´´´
+```
