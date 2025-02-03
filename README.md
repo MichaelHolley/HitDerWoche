@@ -34,8 +34,6 @@ services:
     environment:
       MYSQL_ROOT_PASSWORD: mysecretpassword
       MYSQL_DATABASE: hitderwoche
-    ports:
-      - 3306:3306
     volumes:
       - data:/var/lib/mysql
 volumes:

@@ -1,3 +1,5 @@
+## !! Warning !! this shoud be used for local development only
+
 version: '3'
 
 services:
